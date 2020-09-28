@@ -1,0 +1,19 @@
+---
+# Number of minutes between checks to a check page. Minimum is 1.
+frequency: 30
+
+# slack webhook url for notifications
+webhookUrl: "<Slack URL>"
+
+# url to watch
+searchUrl: "<insert url to watch>"
+
+# Exact text to search for on page
+searchText: "Some text to look for"
+
+# jquery like reference where searchText can be found
+# see: https://github.com/PuerkitoBio/goquery
+domSearch: ".offers-component div .empty"
+
+# message to send in slack notification when the text is no longer present
+changeDetectedMsg: "found a thing"
