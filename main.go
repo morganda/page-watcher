@@ -104,7 +104,7 @@ func checkForListings(configuration Configuration) {
 
 func configSetup() {
 	viper.SetConfigName("config")
-	viper.AddConfigPath("/etc/scraper/")
+	viper.AddConfigPath("/etc/page-watcher/")
 	viper.AddConfigPath(".")
 	err := viper.ReadInConfig()
 	if err != nil {
