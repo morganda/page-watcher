@@ -4,7 +4,7 @@ set -e
 
 configfile=$1
 appname=page-watcher
-container=${appname}-$(basename $(filename $configfile))
+container=${appname}-$(basename $(dirname $configfile))
 image=${appname}:0.1
 
 if docker ps -a | grep -q "${container}"; then
