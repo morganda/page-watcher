@@ -49,9 +49,6 @@ COPY --from=builder /etc/group /etc/group
 
 # Copy our static executable
 COPY --from=builder /go/bin/page-watcher /go/bin/page-watcher
-COPY --from=builder \
-    /go/src/mypackage/myapp/config.yaml \
-    /etc/page-watcher/config.yaml
 
 # Use an unprivileged user.
 USER appuser:appuser
