@@ -84,22 +84,23 @@ func SendNotification(searchUrl string) {
 	log.Println(changeMessage)
 }
 
-func checkForListings(configuration Configuration) {
-
+func checkForListings(configuration Configuration, foundChange bool) bool {
 	searchUrl := configuration.SearchUrl
 	document := retrievePage(searchUrl)
-	foundChange := false
+	changeDetected := foundChange
 	openings := document.Find(configuration.DomSearch)
 
 	if strings.TrimSpace(openings.Text()) == configuration.SearchText {
 		log.Println("No changes detected.")
-		foundChange = false
+		changeDetected = false
 	} else {
 		if foundChange == false {
 			SendNotification(searchUrl)
-			foundChange = true
+			changeDetected = true
 		}
 	}
+
+	return changeDetected
 }
 
 func configSetup() {
@@ -121,8 +122,9 @@ func main() {
 		log.Fatalf("unable to decode into struct, %v", err)
 	}
 
+	foundChange := false
 	for {
-		checkForListings(configuration)
+		foundChange = checkForListings(configuration, foundChange)
 		if configuration.Frequency < 1 {
 			configuration.Frequency = 1
 		}
